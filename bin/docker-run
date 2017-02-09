@@ -6,4 +6,4 @@ source $(dirname "$0")/_bootstrap
 
 # Run a command in the Docker image
 echo "Running in container: $*"
-sudo docker run --rm --tty --interactive --volume "$PROJECT_PATH":/app:rw "$IMAGE" "$@"
+sudo docker run --rm --tty --interactive --volume "$PROJECT_PATH":/app:rw --volume $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent "$IMAGE" "$@"

@@ -1,10 +1,15 @@
 # project-template
 
-`bash` scripts to start up a Docker-based development environment and run
-commands in the container. The scripts default to using `Dockerfile.dev` in the
-root of the project directory.
+These `bash` scripts start up a Docker-based development environment and runs
+commands in the container. The scripts default to using `Dockerfile.dev`
+in the root of the project directory as the `Dockerfile`.
 
-The project directory is also mounted as `/app` inside the container.
+The scripts also:
+
+* Mounts the project directory as `/app` inside the container
+* Port forwards `ssh-agent` into the container
+
+**Note:** This has only been tested on Linux.
 
 
 ## Usage
