@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Approximate `realpath` shim if not installed
+command -v realpath >/dev/null 2>&1 || realpath() {
+  [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+SCRIPT=$(realpath "$0")                   # Absolute path of the script
+SCRIPT_PATH=$(dirname "$SCRIPT")          # Absolute directory of the script
+PROJECT_PATH=$(dirname "$SCRIPT_PATH")    # Absolute parent directory of the script
+
+PROJECT_NAME=$(basename "$PROJECT_PATH")  # Name of the parent directory
+
+# Set default the Dockerfile
+DOCKERFILE=${DOCKERFILE:-"$PROJECT_PATH/Dockerfile.dev"}
+
+# Set default tag name
+IMAGE=${IMAGE:-"$PROJECT_NAME-dev"}
+
+# Build the Docker image
+echo "Building Docker image: $IMAGE"
+sudo docker build -f "$DOCKERFILE" -t "$IMAGE" "$PROJECT_PATH"

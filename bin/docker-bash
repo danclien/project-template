@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Start bash in the Docker image
+"$(dirname "$0")"/docker-run /bin/bash
